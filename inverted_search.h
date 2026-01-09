@@ -24,6 +24,20 @@ typedef struct main_node
     struct main_node *next_link;    /* Contain next hash node link which having same index */
 }main_node;
 
+/* Contain index of main nodes */
+typedef struct hash
+{
+    int index;
+    struct main_node *main_link;
+}hash;
+
+/* Contain valid files */
+typedef struct valid_file_list
+{
+    char files[50];
+    struct valid_file_list *link;
+}valid_file_list;
+
 
 int validate_user_inputs(int argc, char argv[]);
 #endif
