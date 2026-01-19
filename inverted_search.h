@@ -5,6 +5,7 @@
 #include <string.h>
 #include <errno.h>  /* It's needed to use perror() */
 #include <stdlib.h>
+#include <ctype.h>
 
 #define SUCCESS 0
 #define FAILURE -1
@@ -24,7 +25,7 @@ typedef struct main_node
     int file_count;
     char word[50];
     struct sub_node *sub_link;  /* Contain list node link */
-    struct main_node *next_link;    /* Contain next hash node link which having same index */
+    struct main_node *next_link;    /* Contain next hash nod e link which having same index */
 }main_node;
 
 /* Contain index of main nodes */
@@ -32,7 +33,7 @@ typedef struct hash_table
 {
     int index;
     struct main_node *main_link;
-}hash;
+}hash_t;
 
 /* Contain valid files */
 typedef struct valid_file_list
@@ -51,4 +52,10 @@ int is_duplicate(valid_file_list **head2, char *file_name);
 int create_file_list(valid_file_list **head, char *file_name);
 /* Traverses and prints all file names stored in the valid file linked list */
 void print_list(valid_file_list *head);
+
+void create_hashtable(hash_t *hash_arr);
+
+int create_db(valid_file_list **head, hash_t *hash_arr, main_node *main_list, sub_node *sub_list);
+int store_word(char *word, char *file_name, hash_t *hash_arr, main_node *main_list, sub_node *sub_list);
+
 #endif
