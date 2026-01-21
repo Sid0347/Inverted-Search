@@ -55,7 +55,8 @@ void print_list(valid_file_list *head);
 
 void create_hashtable(hash_t *hash_arr);
 
-int create_db(valid_file_list **head, hash_t *hash_arr, main_node *main_list, sub_node *sub_list);
-int store_word(char *word, char *file_name, hash_t *hash_arr, main_node *main_list, sub_node *sub_list);
+int create_db(valid_file_list **head, hash_t *hash_arr);
+int store_word(char *word, char *file_name, hash_t *hash_arr);
+int hash_index_function(char *word);
 
 #endif
