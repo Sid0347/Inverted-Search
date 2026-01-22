@@ -28,11 +28,55 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	/* Create Database */
-	if (create_db(&head, hash_arr, &main_list, &sub_list) == FAILURE)
+	int db_created = 0;
+	while (1)
 	{
-		printf("Create database function failed!\n");
-		return 1;
+		/* Main menu */
+		int choice;
+		printf("1. Create Database\n2. Search Database\n3. Display Database\n4. Update Database\n5. Save Database\n6. Exit\n");
+		printf("Enter your choice : ");
+		if (scanf("%d", &choice) != 1)	/* If user enters non-numeric input, program may go into infinte loop. */
+		{
+			printf("Invalid input.\n");
+			while(getchar() != '\n');	/* Clear buffer */
+			continue;
+		}
+
+		switch (choice)
+		{
+			case 1: /* Create Database */
+				if (db_created)
+				{
+					printf("Database already created, Cannot create again\n");
+					break;
+				}
+				if (create_db(&head, hash_arr) == FAILURE)
+					printf("Create database function failed!\n");
+				else
+					printf("Create database successfully\n");
+				break;
+
+			case 2: /* Search Database */
+				if (!db_created)
+				{
+					printf("Create database first!\n");
+					break;
+				}
+				break;
+			case 3:	/* Display Database */
+				break;
+			case 4:	/* Update Database */
+				break;
+			case 5:	/* Save Database */
+				break;
+			case 6:	/* Exit program */
+				printf("Exiting program\n");
+				exit(0);
+
+			default :
+				printf("Invalid choice! Try again\n");				
+
+		}
 	}
 	print_list(head);
 	return 0;
