@@ -59,4 +59,6 @@ int create_db(valid_file_list **head, hash_t *hash_arr);
 int store_word(char *word, char *file_name, hash_t *hash_arr);
 int hash_index_function(char *word);
 
+int display_db(hash_t *hash_arr);
+
 #endif
