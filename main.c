@@ -1,10 +1,10 @@
 /***************************************************************************************************************************************************
-*Author		:SIDDHARTH GAIKWAD
-*Date		:Mon 08 Jan 2026 14:00:05 IST
-*File		:main.c
-*Title		:Driver function
-*Description	:This function acts like the driver function for the project inverted search
-****************************************************************************************************************************************************/
+ *Author		:SIDDHARTH GAIKWAD
+ *Date		:Mon 08 Jan 2026 14:00:05 IST
+ *File		:main.c
+ *Title		:Driver function
+ *Description	:This function acts like the driver function for the project inverted search
+ ****************************************************************************************************************************************************/
 #include "inverted_search.h"
 
 int main(int argc, char *argv[])
@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
 	hash_t hash_arr[SIZE];
 	create_hashtable(hash_arr);
 
-
 	/* Validate CLA */
 	if (process_input_files(&head, argc, argv) == FAILURE)
 	{
@@ -35,49 +34,60 @@ int main(int argc, char *argv[])
 		int choice;
 		printf("1. Create Database\n2. Search Database\n3. Display Database\n4. Update Database\n5. Save Database\n6. Exit\n");
 		printf("Enter your choice : ");
-		if (scanf("%d", &choice) != 1)	/* If user enters non-numeric input, program may go into infinte loop. */
+		if (scanf("%d", &choice) != 1) /* If user enters non-numeric input, program may go into infinte loop. */
 		{
 			printf("Invalid input.\n");
-			while(getchar() != '\n');	/* Clear buffer */
+			while (getchar() != '\n')
+				; /* Clear buffer */
 			continue;
 		}
 
 		switch (choice)
 		{
-			case 1: /* Create Database */
-				if (db_created)
-				{
-					printf("Database already created, Cannot create again\n");
-					break;
-				}
-				if (create_db(&head, hash_arr) == FAILURE)
-					printf("Create database function failed!\n");
-				else
-					printf("Create database successfully\n");
+		case 1: /* Create Database */
+			if (db_created)
+			{
+				printf("Database already created, Cannot create again\n");
 				break;
+			}
+			if (create_db(&head, hash_arr) == FAILURE)
+				printf("Create database function failed!\n");
+			else
+			{
+				printf("Create database successfully\n");
+				db_created = 1;
+			}
+			break;
+		case 2: /* Search Database */
+			if (!db_created)
+			{
+				printf("Create database first!\n");
+				break;
+			}
+			break;
+		case 3: /* Display Database */
+			if (!db_created)
+			{
+				printf("Create database first!\n");
+				break;
+			}
+			if (display_db(hash_arr) == FAILURE)
+				printf("Display database function failed!\n");
+			else
+				printf("Database displed successfully");
+			break;
+		case 4: /* Update Database */
+			print_list(head);
+			break;
+		case 5: /* Save Database */
+			break;
+		case 6: /* Exit program */
+			printf("Exiting program\n");
+			exit(0);
 
-			case 2: /* Search Database */
-				if (!db_created)
-				{
-					printf("Create database first!\n");
-					break;
-				}
-				break;
-			case 3:	/* Display Database */
-				break;
-			case 4:	/* Update Database */
-				break;
-			case 5:	/* Save Database */
-				break;
-			case 6:	/* Exit program */
-				printf("Exiting program\n");
-				exit(0);
-
-			default :
-				printf("Invalid choice! Try again\n");				
-
+		default:
+			printf("Invalid choice! Try again\n");
 		}
 	}
-	print_list(head);
 	return 0;
 }
