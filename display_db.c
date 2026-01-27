@@ -6,7 +6,7 @@ int display_db(hash_t *hash_arr)
            "Index", "Word", "File_Count", "File_Name", "Word_Count");
     printf("-------------------------------------------------------------------------\n");
 
-    for (int i = 0; i < SIZE; i++)
+    for (int i = 0; i < SIZE - 1; i++)
     {
         /* Case 1: Check if main node is present or not. */
         if (hash_arr[i].main_link == NULL)
@@ -19,6 +19,8 @@ int display_db(hash_t *hash_arr)
         {
             if (index_print)
             {
+                if (main_temp->word[0] == '\0')
+                    continue;
                 printf("%-7d %-20s %-12d ", hash_arr[i].index, main_temp->word, main_temp->file_count);
                 index_print = 0;
             }
