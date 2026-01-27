@@ -70,6 +70,10 @@ int create_db(valid_file_list **head, hash_t *hash_arr)
 int store_word(char *word, char *file_name, hash_t *hash_arr)
 {
     char *ptr = word;
+    /* Check if string is empty or not */
+    if (ptr[0] == '\0')
+        return SUCCESS;
+        
     while (*ptr)
     {
         *ptr = tolower((unsigned char)*ptr);
