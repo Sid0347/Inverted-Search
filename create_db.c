@@ -74,6 +74,10 @@ int store_word(char *word, char *file_name, hash_t *hash_arr)
         return FAILURE;
 
     int Index = hash_index_function(word);
+    /* Check index is valid or not.*/
+    if (Index < 0 || Index >= SIZE)
+        return FAILURE;
+
     main_node *temp = hash_arr[Index].main_link;
     /* Search word in main list */
     while (temp != NULL)
