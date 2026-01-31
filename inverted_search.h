@@ -42,6 +42,14 @@ typedef struct valid_file_list
     struct valid_file_list *link;
 }valid_file_list;
 
+/*------------------------------------------------------------------------------------------*/
+/* Initializes the hash table by setting all index links to NULL. */
+void create_hashtable(hash_t *hash_arr);
+
+/* Traverses and prints all file names stored in the valid file linked list */
+void print_list(valid_file_list *head);
+
+/*------------------------------------------------------------------------------------------*/
 /* Processes command-line inputs, validates files, and builds the valid file linked list */
 int process_input_files(valid_file_list  **head1, int argc, char *argv[]);
 /* Checks whether the given file exists and is not empty */
@@ -50,15 +58,28 @@ int is_exist_or_empty(char *file_name);
 int is_duplicate(valid_file_list **head2, char *file_name);
 /* Creates a new node with the file name and appends it to the valid file linked list */
 int create_file_list(valid_file_list **head, char *file_name);
-/* Traverses and prints all file names stored in the valid file linked list */
-void print_list(valid_file_list *head);
 
-void create_hashtable(hash_t *hash_arr);
-
-int create_db(valid_file_list **head, hash_t *hash_arr);
-int store_word(char *word, char *file_name, hash_t *hash_arr);
+/*------------------------------------------------------------------------------------------*/
+/* Converts all characters of the word to lowercase for consistent storage/search. */
+int normlize_word(char *word);
+/* Generates the hash index for storing or searching a word in the table. */
 int hash_index_function(char *word);
 
+/*------------------------------------------------------------------------------------------*/
+/* Creates the inverted index database using the list of valid input files. */
+int create_db(valid_file_list **head, hash_t *hash_arr);
+/* Stores a word and its file information into the hash table. */
+int store_word(char *word, char *file_name, hash_t *hash_arr);
+
+/*------------------------------------------------------------------------------------------*/
+/* Searches for a word in the database and displays its details if found. */
+int search_db(hash_t *hash_arr);
+
+/*------------------------------------------------------------------------------------------*/
+/* Displays the contents of the hash table in a readable table format. */
 int display_db(hash_t *hash_arr);
+
+/*------------------------------------------------------------------------------------------*/
+
 
 #endif
