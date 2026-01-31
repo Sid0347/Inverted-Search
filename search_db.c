@@ -62,6 +62,7 @@ int search_db(hash_t *hash_arr)
                 if (sub_temp)
                     printf("%-42s", " ");
             }
+            printf("-------------------------------------------------------------------------\n");
             return SUCCESS;
         }
         main_temp = main_temp->next_link;
