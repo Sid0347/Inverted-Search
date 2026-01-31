@@ -69,16 +69,9 @@ int create_db(valid_file_list **head, hash_t *hash_arr)
  ***************************************************************************************************/
 int store_word(char *word, char *file_name, hash_t *hash_arr)
 {
-    char *ptr = word;
-    /* Check if string is empty or not */
-    if (ptr[0] == '\0')
-        return SUCCESS;
-        
-    while (*ptr)
-    {
-        *ptr = tolower((unsigned char)*ptr);
-        ptr++;
-    }
+    /* Converting word to lower case. */
+    if (normlize_word(word) == FAILURE)
+        return FAILURE;
 
     int Index = hash_index_function(word);
     main_node *temp = hash_arr[Index].main_link;
@@ -170,4 +163,30 @@ int hash_index_function(char *word)
         return word[0] - 'a';
     else
         return 26;
+}
+
+/***************************************************************************************************
+ * Title       : Normalize Word
+ * Description : This function converts all characters of the given word
+ *               to lowercase. It modifies the input string in place and
+ *               ensures safe handling by validating the input pointer.
+ * Prototype   : int normlize_word(char *word);
+ * Input       : word : Pointer to the string that needs to be normalized.
+ * Output      : The input string is converted to lowercase.
+ * Return      : SUCCESS if normalization is completed successfully,
+ *               FAILURE if the input pointer is NULL.
+ ***************************************************************************************************/
+int normlize_word(char *word)
+{
+    if (word == NULL)
+        return FAILURE;
+
+    char *ptr = word;
+
+    while (*ptr)
+    {
+        *ptr = tolower((unsigned char)*ptr);
+        ptr++;
+    }
+    return SUCCESS;
 }
