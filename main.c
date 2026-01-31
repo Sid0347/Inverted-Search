@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 				printf("Create database function failed!\n");
 			else
 			{
-				printf("Create database successfully\n");
+				printf("Create database successfully.\n");
 				db_created = 1;
 			}
 			break;
@@ -64,6 +64,10 @@ int main(int argc, char *argv[])
 				printf("Create database first!\n");
 				break;
 			}
+			if (search_db(hash_arr) == FAILURE)
+				printf("Search database function failed!\n");
+			else	
+				printf("Search database successfully.\n");
 			break;
 		case 3: /* Display Database */
 			if (!db_created)
@@ -74,7 +78,7 @@ int main(int argc, char *argv[])
 			if (display_db(hash_arr) == FAILURE)
 				printf("Display database function failed!\n");
 			else
-				printf("Database displed successfully");
+				printf("Database displed successfully.\n");
 			break;
 		case 4: /* Update Database */
 			print_list(head);
