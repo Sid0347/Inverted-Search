@@ -1,5 +1,16 @@
 #include "inverted_search.h"
 
+/***************************************************************************************************
+ * Title       : Display Database
+ * Description : This function is used to display the inverted index database
+ *               in a readable table format. It goes through each index of the
+ *               hash table, checks for available words, and prints word details
+ *               along with the list of files and their respective word counts.
+ * Prototype   : int display_db(hash_t *hash_arr);
+ * Input       : hash_arr : Pointer to the hash table.
+ * Output      : Displays the database contents on the screen.
+ * Return      : SUCCESS after successfully displaying the database.
+ ***************************************************************************************************/
 int display_db(hash_t *hash_arr)
 {
     printf("%-7s %-20s %-12s %-20s %-12s\n",
