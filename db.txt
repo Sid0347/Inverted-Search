@@ -1,0 +1,17 @@
+#0;adity;1;temp.txt;1;#
+#6;go;1;temp.txt;1;#
+#7;hello;1;data.txt;1;#
+#7;hi;1;temp.txt;1;#
+#8;is;1;temp.txt;1;#
+#9;jerry;1;temp.txt;1;#
+#12;my;1;data.txt;1;#
+#12;month;1;temp.txt;1;#
+#13;nahi;1;data.txt;1;#
+#13;name;1;data.txt;1;#
+#13;next;1;temp.txt;1;#
+#14;on;1;temp.txt;1;#
+#18;sid;2;temp.txt;1;data.txt;3;#
+#19;two;1;temp.txt;1;#
+#19;trip;1;temp.txt;1;#
+#22;will;2;temp.txt;1;data.txt;1;#
+#22;we;1;temp.txt;6;#
