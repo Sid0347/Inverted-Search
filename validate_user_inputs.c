@@ -27,8 +27,8 @@ int process_input_files(valid_file_list **head1, int argc, char *argv[])
     }
     if (count == 0)
     {
-        printf("All input file are invalid!\n No file list is created!\n");
-        return FAILURE;
+        printf("All input file are invalid!\nNo file list is created!\n");
+        g_list_flag = 1;
     }
     return SUCCESS;
 }
