@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	if (process_input_files(&head, argc, argv) == FAILURE)
 	{
 		printf("User inputs validation failed!\n");
-		return 1;
+		return -1;
 	}
 
 	int db_created = 0;
@@ -84,6 +84,15 @@ int main(int argc, char *argv[])
 			print_list(head);
 			break;
 		case 5: /* Save Database */
+			if (!db_created)
+			{
+				printf("Create database first!\n");
+				break;
+			}
+			if (save_db(hash_arr) == FAILURE)
+				printf("Save database function failed!\n");
+			else
+				printf("Save database successfully.\n");
 			break;
 		case 6: /* Exit program */
 			printf("Exiting program\n");
