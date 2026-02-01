@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	{
 		/* Main menu */
 		int choice;
-		printf("1. Create Database\n2. Search Database\n3. Display Database\n4. Update Database\n5. Save Database\n6. Exit\n");
+		printf("1. Create Database\n2. Search Database\n3. Display Database\n4. Update Database\n5. Save Database\n6. Print Valid File List\n7.Exit\n");
 		printf("Enter your choice : ");
 		if (scanf("%d", &choice) != 1) /* If user enters non-numeric input, program may go into infinte loop. */
 		{
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 			}
 			if (search_db(hash_arr) == FAILURE)
 				printf("Search database function failed!\n");
-			else	
+			else
 				printf("Search database successfully.\n");
 			break;
 		case 3: /* Display Database */
@@ -81,7 +81,6 @@ int main(int argc, char *argv[])
 				printf("Database displed successfully.\n");
 			break;
 		case 4: /* Update Database */
-			print_list(head);
 			break;
 		case 5: /* Save Database */
 			if (!db_created)
@@ -94,7 +93,13 @@ int main(int argc, char *argv[])
 			else
 				printf("Save database successfully.\n");
 			break;
-		case 6: /* Exit program */
+		case 6: /* Print valid file list.*/
+			if (valid_files_list(head) == FAILURE)
+				printf("Print valid file list function failed!\n");
+			else
+				printf("Prints valid file list successfully.\n");
+			break;
+		case 7: /* Exit program */
 			printf("Exiting program\n");
 			exit(0);
 
