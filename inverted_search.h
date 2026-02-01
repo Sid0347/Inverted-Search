@@ -11,6 +11,8 @@
 #define FAILURE -1
 #define SIZE 27
 
+extern int g_list_flag;
+
 /* Sub Node */
 typedef struct sub_node
 {
@@ -47,7 +49,7 @@ typedef struct valid_file_list
 void create_hashtable(hash_t *hash_arr);
 
 /* Traverses and prints all file names stored in the valid file linked list */
-void print_list(valid_file_list *head);
+int valid_files_list(valid_file_list *head);
 
 /*------------------------------------------------------------------------------------------*/
 /* Processes command-line inputs, validates files, and builds the valid file linked list */
@@ -83,4 +85,6 @@ int display_db(hash_t *hash_arr);
 /* Saves the contents of the hash table database to an output file. */
 int save_db(hash_t *hash_arr);
 
+/*------------------------------------------------------------------------------------------*/
+int update_db(hash_t *hash_arr);
 #endif
