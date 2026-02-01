@@ -7,6 +7,9 @@
  ****************************************************************************************************************************************************/
 #include "inverted_search.h"
 
+/* Used to check wether valid file list is created or not.*/
+int g_list_flag = 0;
+
 int main(int argc, char *argv[])
 {
 	/* Define the main function here */
@@ -27,7 +30,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	int db_created = 0;
+	int db_created = 0, db_updated = 0;
 	while (1)
 	{
 		/* Main menu */
@@ -45,7 +48,12 @@ int main(int argc, char *argv[])
 		switch (choice)
 		{
 		case 1: /* Create Database */
-			if (db_created)
+			if (g_list_flag)/* Check valid file are available or not to create database.*/
+			{
+				printf("The file list is not available, Cannot create database.\n");
+				break;
+			}
+			if (db_created)/* Check database is already created or not.*/
 			{
 				printf("Database already created, Cannot create again\n");
 				break;
@@ -59,7 +67,7 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case 2: /* Search Database */
-			if (!db_created)
+			if (!db_created || db_updated)
 			{
 				printf("Create database first!\n");
 				break;
@@ -70,7 +78,7 @@ int main(int argc, char *argv[])
 				printf("Search database successfully.\n");
 			break;
 		case 3: /* Display Database */
-			if (!db_created)
+			if (!db_created || db_updated)
 			{
 				printf("Create database first!\n");
 				break;
@@ -81,9 +89,13 @@ int main(int argc, char *argv[])
 				printf("Database displed successfully.\n");
 			break;
 		case 4: /* Update Database */
+			if (update_db(hash_arr) == FAILURE)
+				printf("Update database function failed!\n");
+			else
+				printf("Update database successfully.\n");
 			break;
 		case 5: /* Save Database */
-			if (!db_created)
+			if (!db_created || db_updated)
 			{
 				printf("Create database first!\n");
 				break;
