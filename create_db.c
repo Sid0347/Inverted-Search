@@ -69,6 +69,12 @@ int create_db(valid_file_list **head, hash_t *hash_arr)
  ***************************************************************************************************/
 int store_word(char *word, char *file_name, hash_t *hash_arr)
 {
+    /* Non-fatal cases: just skip (Returning SUCCESS to avoid file closing to proceed operation for further words.)*/
+    if (word == NULL || word[0] == '\0')
+        return SUCCESS;
+    if (!isalpha((unsigned char)word[0]))
+        return SUCCESS;
+
     /* Converting word to lower case. */
     if (normlize_word(word) == FAILURE)
         return FAILURE;
@@ -182,9 +188,6 @@ int hash_index_function(char *word)
  ***************************************************************************************************/
 int normlize_word(char *word)
 {
-    if (word == NULL)
-        return FAILURE;
-
     char *ptr = word;
 
     while (*ptr)
