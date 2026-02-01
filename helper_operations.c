@@ -11,7 +11,7 @@
  *
  * Output      : Prints the file names in the list followed by NULL.
  ***************************************************************************************************/
-void print_list(valid_file_list *head)
+int valid_files_list(valid_file_list *head)
 {
 	if (head == NULL)
 	{
@@ -27,6 +27,7 @@ void print_list(valid_file_list *head)
 
 	    printf("NULL\n");
     }
+	return SUCCESS;
 }
 
 /***************************************************************************************************
