@@ -80,6 +80,7 @@ int search_db(hash_t *hash_arr);
 int display_db(hash_t *hash_arr);
 
 /*------------------------------------------------------------------------------------------*/
-
+/* Saves the contents of the hash table database to an output file. */
+int save_db(hash_t *hash_arr);
 
 #endif
