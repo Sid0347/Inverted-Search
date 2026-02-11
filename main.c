@@ -1,10 +1,11 @@
 /***************************************************************************************************************************************************
- *Author		:SIDDHARTH GAIKWAD
- *Date		:Mon 08 Jan 2026 14:00:05 IST
- *File		:main.c
- *Title		:Driver function
- *Description	:This function acts like the driver function for the project inverted search
- ****************************************************************************************************************************************************/
+*Project name	:INVERTED SEARCH
+*Author			:SIDDHARTH GAIKWAD
+*Date			:Mon 08 Jan 2026 14:00:05 IST
+*File			:main.c
+*Title			:Driver function
+*Description	:This function acts like the driver function for the project inverted search
+****************************************************************************************************************************************************/
 #include "inverted_search.h"
 
 /* Used to check wether valid file list is created or not.*/
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case 2: /* Search Database */
-			if (!db_created || db_updated)
+			if (!(db_created || db_updated))
 			{
 				printf("Create database first!\n");
 				break;
@@ -78,7 +79,7 @@ int main(int argc, char *argv[])
 				printf("Search database successfully.\n");
 			break;
 		case 3: /* Display Database */
-			if (!db_created || db_updated)
+			if (!(db_created || db_updated))
 			{
 				printf("Create database first!\n");
 				break;
@@ -92,10 +93,13 @@ int main(int argc, char *argv[])
 			if (update_db(hash_arr) == FAILURE)
 				printf("Update database function failed!\n");
 			else
+			{
 				printf("Update database successfully.\n");
+				db_updated = 1;
+			}
 			break;
 		case 5: /* Save Database */
-			if (!db_created || db_updated)
+			if (!(db_created || db_updated))
 			{
 				printf("Create database first!\n");
 				break;
