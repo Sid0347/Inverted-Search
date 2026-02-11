@@ -7,10 +7,9 @@ int update_db(hash_t *hash_arr)
         return FAILURE;
 
     /* Read file name from user.*/
-    char file_name[20];
+    char file_name[128];
     printf("Enter the file name which data you want to update : ");
     scanf("%19s", file_name);
-
     /* Validate file extenstion.*/
     char *ext = strrchr(file_name, '.');
     if (!ext || strcmp(ext, ".txt") != 0)
@@ -27,10 +26,12 @@ int update_db(hash_t *hash_arr)
         return FAILURE;
     }
 
-    char line[100];
+    char line[256];
     fgets(line, sizeof(line), fptr);
     /* Check is it valid database file or not, By checking '#' on start and end of line.*/
     int len = strlen(line);
+    if (len <= 1)
+        return FAILURE;
     if (line[0] != '#' || line[len - 2] != '#')
     {
         printf("Not a valid database file, Cannot proceed further.\n");
@@ -44,14 +45,25 @@ int update_db(hash_t *hash_arr)
     while (fgets(line, sizeof(line), fptr))
     {
         /* Extract index.*/
-        int index = atoi(strtok(line, "#;"));
-        /* Extract word.*/
-        char *word = strtok(NULL, ";");
-        /* Extract file count.*/
-        int file_count = atoi(strtok(NULL, ";"));
+        char *token = strtok(line, "#;");
+        if (!token)
+            continue;
+        int index = atoi(token);
 
-        /* Search word in hash table.*/
+        /* Extract word.*/
+        token = strtok(NULL, ";");
+        if (!token)
+            continue;
+        char *word = token;
+
+        /* Extract file count.*/
+        token = strtok(NULL, ";");
+        if (!token)
+            continue;
+        int file_count = atoi(token);
+
         main_node *main_temp = hash_arr[index].main_link;
+        /* Search word in hash table.*/
         main_node *main_prev = NULL;
 
         while (main_temp)
@@ -80,8 +92,17 @@ int update_db(hash_t *hash_arr)
 
             for (int i = 0; i < file_count; i++)
             {
-                char *file_name = strtok(NULL, ";");
-                int word_count = atoi(strtok(NULL, ";"));
+                /* Extract file name.*/
+                token = strtok(NULL, ";");
+                if (!token)
+                    continue;
+                char *file_name = token;
+
+                /* Extract word count.*/
+                token = strtok(NULL, ";");
+                if (!token)
+                    continue;
+                int word_count = atoi(token);
 
                 sub_node *sub_new = malloc(sizeof(sub_node));
                 if (!sub_new)
@@ -96,7 +117,7 @@ int update_db(hash_t *hash_arr)
                 if (main_new->sub_link == NULL)
                     main_new->sub_link = sub_new;
                 else
-                    main_prev->sub_link = sub_new;
+                    sub_prev->next = sub_new;
 
                 sub_prev = sub_new;
             }
@@ -111,8 +132,17 @@ int update_db(hash_t *hash_arr)
         {
             for (int i = 0; i < file_count; i++)
             {
-                char *file_name = strtok(NULL, ";");
-                int word_count = atoi(strtok(NULL, ";"));
+                /* Extract file name.*/
+                token = strtok(NULL, ";");
+                if (!token)
+                    continue;
+                char *file_name = token;
+
+                /* Extract word count.*/
+                token = strtok(NULL, ";");
+                if (!token)
+                    continue;
+                int word_count = atoi(token);
 
                 sub_node *sub_temp = main_temp->sub_link;
                 sub_node *sub_prev = NULL;
@@ -141,7 +171,10 @@ int update_db(hash_t *hash_arr)
                     sub_new->word_count = word_count;
                     sub_new->next = NULL;
 
-                    sub_prev->next = sub_new;
+                    if (main_temp->sub_link == NULL)
+                        main_temp->sub_link = sub_new;
+                    else
+                        sub_prev->next = sub_new;
                     main_temp->file_count++;
                 }
             }
